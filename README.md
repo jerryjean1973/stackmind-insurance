@@ -1,1 +1,3 @@
-# stackmind-insurance
+# StackMind MVP
+
+Deploy-ready insurance analyzer

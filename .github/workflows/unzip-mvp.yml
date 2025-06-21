@@ -1,0 +1,31 @@
+name: Unzip MVP and Commit
+
+on:
+  push:
+    paths:
+      - 'stackmind-insurance-mvp.zip'
+    branches:
+      - main
+
+jobs:
+  unzip-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Unzip MVP file
+        run: |
+          unzip -o stackmind-insurance-mvp.zip -d .
+          rm stackmind-insurance-mvp.zip
+
+      - name: Set up git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "Unzip and add stackmind-insurance-mvp.zip content" || echo "No changes to commit"
+          git push
